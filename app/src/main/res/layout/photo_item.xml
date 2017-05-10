@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--suppress AndroidUnknownAttribute -->
+    <data class="by.test.photoapptest.ui.photos.PhotoItemBinding">
+
+        <variable
+            name="photo"
+            type="by.test.photoapptest.model.photo.ImageDtoOut" />
+
+        <variable
+            name="listener"
+            type="by.test.photoapptest.ui.photos.PhotoListAdapter.Listener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/photo_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:onClick="@{() -> listener.choosePhotoItem(photo)}"
+            app:srcCompat="@{photo.url}" />
+
+        <TextView
+            android:id="@+id/photo_date"
+            style="@style/TextAppearance.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{photo.date}" />
+    </LinearLayout>
+</layout>

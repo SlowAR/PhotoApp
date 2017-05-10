@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="by.test.photoapptest.ui.camera.CameraActivity">
+
+    <!--suppress AndroidUnknownAttribute -->
+    <data class="by.test.photoapptest.ui.camera.ActivityCameraBinding" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.flurgle.camerakit.CameraView
+            android:id="@+id/camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:ckFacing="back"
+            app:ckFocus="continuous"
+            app:ckPermissions="picture" />
+
+        <ImageButton
+            android:id="@+id/photo_button"
+            android:layout_width="@dimen/make_photo_icon_size"
+            android:layout_height="@dimen/make_photo_icon_size"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/std_margin_extra_huge"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:onClick="onMakePhotoClick"
+            app:srcCompat="@drawable/ic_make_photo" />
+    </FrameLayout>
+</layout>

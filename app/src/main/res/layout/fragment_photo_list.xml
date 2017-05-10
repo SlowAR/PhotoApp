@@ -1,0 +1,24 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="by.test.photoapptest.ui.photos.PhotoListFragment">
+
+    <!--suppress AndroidUnknownAttribute -->
+    <data class="by.test.photoapptest.ui.photos.FragmentPhotoListBinding" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/photos_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/std_margin_small"
+            android:paddingStart="0dp"
+            app:layoutManager="@string/grid_layout_manager"
+            app:spanCount="4" />
+    </LinearLayout>
+</layout>

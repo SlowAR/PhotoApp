@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">PhotoAppTest</string>
+    <string name="login_text">Login</string>
+    <string name="register_text">Register</string>
+    <string name="signin_text">Sign In</string>
+    <string name="signup_text">Sign Up</string>
+    <string name="password_text">Password</string>
+    <string name="password_confirm_text">Confirm Password</string>
+    <string name="title_activity_photos">PhotosActivity</string>
+
+    <string name="title_photos">Photos</string>
+    <string name="title_map">Map</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
