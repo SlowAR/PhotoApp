@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import by.test.photoapptest.model.comment.CommentDtoOut;
 import by.test.photoapptest.model.photo.ImageDtoOut;
 import by.test.photoapptest.model.user.SignUserOutDto;
 import by.test.photoapptest.ui.photos.comments.CommentListAdapter;
+import by.test.photoapptest.util.EndlessRecyclerViewScrollListener;
 
 public class DetailPhotoFragment extends Fragment implements CommentListAdapter.Listener,
         DetailPhotosListener, View.OnClickListener {
@@ -80,6 +84,17 @@ public class DetailPhotoFragment extends Fragment implements CommentListAdapter.
 
         mAdapter = new CommentListAdapter(getContext(), new ArrayList<CommentDtoOut>(), this);
         mBinding.commentsRecyclerView.setAdapter(mAdapter);
+
+        EndlessRecyclerViewScrollListener mScrollListener =
+                new EndlessRecyclerViewScrollListener((LinearLayoutManager) (mBinding
+                .commentsRecyclerView.getLayoutManager())) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                mPresenter.getPhotoComments(mPhoto.getId(), page);
+            }
+        };
+        mBinding.commentsRecyclerView.addOnScrollListener(mScrollListener);
+
         mBinding.sendComment.setOnClickListener(this);
         return mBinding.getRoot();
     }
@@ -91,7 +106,7 @@ public class DetailPhotoFragment extends Fragment implements CommentListAdapter.
 
     @Override
     public void updateCommentsList(ArrayList<CommentDtoOut> commentList) {
-        mAdapter.setComments(commentList);
+        mAdapter.appendComments(commentList);
     }
 
     @Override

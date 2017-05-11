@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import by.test.photoapptest.R;
 import by.test.photoapptest.di.App;
 import by.test.photoapptest.model.photo.ImageDtoOut;
 import by.test.photoapptest.model.user.SignUserOutDto;
+import by.test.photoapptest.util.EndlessRecyclerViewScrollListener;
 
 public class PhotoListFragment extends Fragment implements PhotoListAdapter.Listener, PhotosListener {
 
@@ -44,7 +47,6 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
         App.getAppComponent().inject(this);
         mPresenter.setListener(this);
         mPresenter.setUser(mUser);
-        mPresenter.getUserPhotos(0);
     }
 
     @Override
@@ -61,7 +63,7 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
 
     @Override
     public void updatePhotoList(ArrayList<ImageDtoOut> photoList) {
-        mAdapter.setPhotos(photoList);
+        mAdapter.appendPhotos(photoList);
     }
 
     @Override
@@ -72,15 +74,19 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        ArrayList<ImageDtoOut> photoList = new ArrayList<>();
-//        for(int i = 0; i < 14; i++) {
-//            photoList.add(new ImageDtoOut(ContextCompat.getDrawable(getContext(), R.mipmap.ic_launcher),
-//                    "photo " + (i+1)));
-//        }
-
-        mAdapter = new PhotoListAdapter(getContext(), new ArrayList<ImageDtoOut>(), this);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_photo_list, null, false);
+        mAdapter = new PhotoListAdapter(getContext(), new ArrayList<ImageDtoOut>(), this);
         mBinding.photosRecyclerView.setAdapter(mAdapter);
+        EndlessRecyclerViewScrollListener mScrollListener =
+                new EndlessRecyclerViewScrollListener((GridLayoutManager) (mBinding
+                .photosRecyclerView.getLayoutManager())) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                mPresenter.getUserPhotos(page);
+            }
+        };
+        mBinding.photosRecyclerView.addOnScrollListener(mScrollListener);
+
         return mBinding.getRoot();
     }
 

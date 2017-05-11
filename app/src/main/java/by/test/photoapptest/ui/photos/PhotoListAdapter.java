@@ -40,6 +40,11 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoViewHolder> {
         holder.setPhoto(mPhotos.get(position));
     }
 
+    public void appendPhotos(ArrayList<ImageDtoOut> photos) {
+        mPhotos.addAll(photos);
+        notifyDataSetChanged();
+    }
+
     public void setPhotos(ArrayList<ImageDtoOut> photos) {
         mPhotos = photos;
         notifyDataSetChanged();

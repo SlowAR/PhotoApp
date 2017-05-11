@@ -41,6 +41,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentViewHolder> 
         holder.setComment(mComments.get(position));
     }
 
+    public void appendComments(ArrayList<CommentDtoOut> comments) {
+        mComments.addAll(comments);
+        notifyDataSetChanged();
+    }
+
     public void setComments(ArrayList<CommentDtoOut> comments) {
         mComments = comments;
         notifyDataSetChanged();
