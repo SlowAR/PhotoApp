@@ -6,9 +6,8 @@ import android.support.annotation.NonNull;
 import javax.inject.Inject;
 
 import by.test.photoapptest.di.App;
-import by.test.photoapptest.model.user.SignUserOutDto;
-import by.test.photoapptest.model.user.SignUserDtoIn;
-import by.test.photoapptest.model.user.SignUserResponse;
+import by.test.photoapptest.ui.model.user.SignUserDtoIn;
+import by.test.photoapptest.ui.model.user.SignUserResponse;
 import by.test.photoapptest.ui.PhotoAppActivity;
 import by.test.photoapptest.util.retrofit.PhotoServiceApi;
 import io.reactivex.Observer;

@@ -1,9 +1,9 @@
 package by.test.photoapptest.ui.photos.detail;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import by.test.photoapptest.model.comment.CommentDtoOut;
-import by.test.photoapptest.model.photo.ImageDtoOut;
+import by.test.photoapptest.ui.model.comment.CommentDtoOut;
 
 /**
  * Created by SlowAR on 11.05.2017.
@@ -11,7 +11,7 @@ import by.test.photoapptest.model.photo.ImageDtoOut;
 
 public interface DetailPhotosListener {
 
-    void updateCommentsList(ArrayList<CommentDtoOut> commentList);
+    void updateCommentsList(List<CommentDtoOut> commentList);
 
     void refreshPhotoComments();
 }

@@ -13,20 +13,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import by.test.photoapptest.R;
 import by.test.photoapptest.di.App;
-import by.test.photoapptest.model.photo.ImageDtoOut;
-import by.test.photoapptest.model.user.SignUserOutDto;
+import by.test.photoapptest.ui.model.photo.ImageDtoOut;
+import by.test.photoapptest.ui.model.user.SignUserOutDto;
 import by.test.photoapptest.util.EndlessRecyclerViewScrollListener;
 
 public class PhotoListFragment extends Fragment implements PhotoListAdapter.Listener, PhotosListener {
 
     @Inject
     PhotoListPresenter mPresenter;
-    private FragmentPhotoListBinding mBinding;
+    private by.test.photoapptest.ui.photos.FragmentPhotoListBinding mBinding;
     private OnFragmentInteractionListener mListener;
     private PhotoListAdapter mAdapter;
     private SignUserOutDto mUser;
@@ -62,8 +63,10 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     }
 
     @Override
-    public void updatePhotoList(ArrayList<ImageDtoOut> photoList) {
+    public void updatePhotoList(List<ImageDtoOut> photoList) {
         mAdapter.appendPhotos(photoList);
+        mPresenter.putPhotosInDb(photoList);
+        //mPresenter.getPhotosFromDb();
     }
 
     @Override
@@ -75,7 +78,7 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_photo_list, null, false);
-        mAdapter = new PhotoListAdapter(getContext(), new ArrayList<ImageDtoOut>(), this);
+        mAdapter = new PhotoListAdapter(getContext(), new ArrayList<>(), this);
         mBinding.photosRecyclerView.setAdapter(mAdapter);
         EndlessRecyclerViewScrollListener mScrollListener =
                 new EndlessRecyclerViewScrollListener((GridLayoutManager) (mBinding

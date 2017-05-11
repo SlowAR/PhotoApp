@@ -8,7 +8,7 @@
 
         <variable
             name="photo"
-            type="by.test.photoapptest.model.photo.ImageDtoOut" />
+            type="by.test.photoapptest.ui.model.photo.ImageDtoOut" />
     </data>
 
     <LinearLayout

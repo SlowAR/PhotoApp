@@ -1,4 +1,4 @@
-package by.test.photoapptest.model.comment;
+package by.test.photoapptest.ui.model.photo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,15 +8,15 @@ import java.util.ArrayList;
  * Created by SlowAR on 11.05.2017.
  */
 
-public class CommentsGetDtoResponse {
+public class ImageGetResponse {
 
     @JsonProperty("status")
     private int status;
 
     @JsonProperty("data")
-    private ArrayList<CommentDtoOut> comments;
+    private ArrayList<ImageDtoOut> photos;
 
-    public CommentsGetDtoResponse() {
+    public ImageGetResponse() {
     }
 
     public int getStatus() {
@@ -27,11 +27,11 @@ public class CommentsGetDtoResponse {
         this.status = status;
     }
 
-    public ArrayList<CommentDtoOut> getComments() {
-        return comments;
+    public ArrayList<ImageDtoOut> getPhotos() {
+        return photos;
     }
 
-    public void setComments(ArrayList<CommentDtoOut> comments) {
-        this.comments = comments;
+    public void setPhotos(ArrayList<ImageDtoOut> photos) {
+        this.photos = photos;
     }
 }

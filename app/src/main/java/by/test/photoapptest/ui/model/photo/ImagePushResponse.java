@@ -1,22 +1,20 @@
-package by.test.photoapptest.model.photo;
+package by.test.photoapptest.ui.model.photo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.ArrayList;
 
 /**
  * Created by SlowAR on 11.05.2017.
  */
 
-public class ImageGetResponse {
+public class ImagePushResponse {
 
     @JsonProperty("status")
     private int status;
 
     @JsonProperty("data")
-    private ArrayList<ImageDtoOut> photos;
+    private ImageDtoOut photos;
 
-    public ImageGetResponse() {
+    public ImagePushResponse() {
     }
 
     public int getStatus() {
@@ -27,11 +25,11 @@ public class ImageGetResponse {
         this.status = status;
     }
 
-    public ArrayList<ImageDtoOut> getPhotos() {
+    public ImageDtoOut getPhotos() {
         return photos;
     }
 
-    public void setPhotos(ArrayList<ImageDtoOut> photos) {
+    public void setPhotos(ImageDtoOut photos) {
         this.photos = photos;
     }
 }

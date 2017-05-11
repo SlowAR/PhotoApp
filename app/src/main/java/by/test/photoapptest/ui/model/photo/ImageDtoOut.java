@@ -1,27 +1,42 @@
-package by.test.photoapptest.model.photo;
+package by.test.photoapptest.ui.model.photo;
 
 import android.graphics.drawable.Drawable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ForeignKey;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.rx2.structure.BaseRXModel;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+import by.test.photoapptest.util.dbflow.PhotoDatabase;
 
 /**
  * Created by SlowAR on 10.05.2017.
  */
 
-public class ImageDtoOut {
+@Table(database = PhotoDatabase.class)
+public class ImageDtoOut extends BaseModel {
 
+    @Column
     @JsonProperty("date")
     private int date;
 
+    @Column
+    @PrimaryKey
     @JsonProperty("id")
     private int id;
 
+    @Column
     @JsonProperty("lat")
     private double latitude;
 
+    @Column
     @JsonProperty("lng")
     private double longitude;
 
+    @Column
     @JsonProperty("url")
     private String url;
 

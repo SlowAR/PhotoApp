@@ -1,4 +1,4 @@
-package by.test.photoapptest.model.photo;
+package by.test.photoapptest.ui.model.photo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -9,8 +9,7 @@ import android.widget.Toast;
 
 import by.test.photoapptest.R;
 import by.test.photoapptest.di.App;
-import by.test.photoapptest.model.user.SignUserDtoIn;
-import by.test.photoapptest.model.user.SignUserOutDto;
+import by.test.photoapptest.ui.model.user.SignUserOutDto;
 import by.test.photoapptest.ui.photos.PhotosActivity;
 import by.test.photoapptest.ui.signin.SignInListener;
 import by.test.photoapptest.ui.signin.SignInPagerAdapter;

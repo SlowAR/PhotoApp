@@ -1,13 +1,13 @@
 package by.test.photoapptest.util.retrofit;
 
-import by.test.photoapptest.model.comment.CommentDtoIn;
-import by.test.photoapptest.model.comment.CommentsGetDtoResponse;
-import by.test.photoapptest.model.comment.CommentsPostDtoResponse;
-import by.test.photoapptest.model.photo.ImageDtoIn;
-import by.test.photoapptest.model.photo.ImageGetResponse;
-import by.test.photoapptest.model.photo.ImagePushResponse;
-import by.test.photoapptest.model.user.SignUserDtoIn;
-import by.test.photoapptest.model.user.SignUserResponse;
+import by.test.photoapptest.ui.model.comment.CommentDtoIn;
+import by.test.photoapptest.ui.model.comment.CommentsGetDtoResponse;
+import by.test.photoapptest.ui.model.comment.CommentsPostDtoResponse;
+import by.test.photoapptest.ui.model.photo.ImageDtoIn;
+import by.test.photoapptest.ui.model.photo.ImageGetResponse;
+import by.test.photoapptest.ui.model.photo.ImagePushResponse;
+import by.test.photoapptest.ui.model.user.SignUserDtoIn;
+import by.test.photoapptest.ui.model.user.SignUserResponse;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;

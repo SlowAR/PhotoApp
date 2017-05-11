@@ -8,7 +8,7 @@
 
         <variable
             name="comment"
-            type="by.test.photoapptest.model.comment.CommentDtoOut" />
+            type="by.test.photoapptest.ui.model.comment.CommentDtoOut" />
 
         <variable
             name="listener"

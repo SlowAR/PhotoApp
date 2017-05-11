@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!--suppress AndroidUnknownAttribute -->
-    <data class="by.test.ui.signin.FragmentSigninPageBinding" />
+    <data class="by.test.photoapptest.ui.signin.FragmentSigninPageBinding" />
 
     <LinearLayout
         android:layout_width="match_parent"

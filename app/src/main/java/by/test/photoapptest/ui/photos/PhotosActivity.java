@@ -10,8 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import by.test.photoapptest.R;
-import by.test.photoapptest.model.photo.ImageDtoOut;
-import by.test.photoapptest.model.user.SignUserOutDto;
+import by.test.photoapptest.ui.model.photo.ImageDtoOut;
+import by.test.photoapptest.ui.model.user.SignUserOutDto;
 import by.test.photoapptest.ui.camera.CameraActivity;
 import by.test.photoapptest.ui.map.MapFragment;
 import by.test.photoapptest.ui.photos.detail.DetailPhotoFragment;
@@ -24,7 +24,7 @@ public class PhotosActivity extends AppCompatActivity
     private final int MAP_FRAGMENT_TYPE = 1;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
-    private ActivityPhotosBinding mBinding;
+    private by.test.photoapptest.ui.photos.ActivityPhotosBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

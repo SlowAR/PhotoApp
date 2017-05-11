@@ -1,22 +1,20 @@
-package by.test.photoapptest.model.photo;
+package by.test.photoapptest.ui.model.comment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.ArrayList;
 
 /**
  * Created by SlowAR on 11.05.2017.
  */
 
-public class ImagePushResponse {
+public class CommentsPostDtoResponse {
 
     @JsonProperty("status")
     private int status;
 
     @JsonProperty("data")
-    private ImageDtoOut photos;
+    private CommentDtoOut comments;
 
-    public ImagePushResponse() {
+    public CommentsPostDtoResponse() {
     }
 
     public int getStatus() {
@@ -27,11 +25,11 @@ public class ImagePushResponse {
         this.status = status;
     }
 
-    public ImageDtoOut getPhotos() {
-        return photos;
+    public CommentDtoOut getComments() {
+        return comments;
     }
 
-    public void setPhotos(ImageDtoOut photos) {
-        this.photos = photos;
+    public void setComments(CommentDtoOut comments) {
+        this.comments = comments;
     }
 }

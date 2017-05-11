@@ -6,9 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import by.test.photoapptest.model.photo.ImageDtoOut;
+import by.test.photoapptest.ui.model.photo.ImageDtoOut;
 
 /**
  * Created by SlowAR on 10.05.2017.
@@ -18,10 +18,10 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoViewHolder> {
 
     private final LayoutInflater mLayoutInflater;
     private Listener mListener;
-    private ArrayList<ImageDtoOut> mPhotos;
+    private List<ImageDtoOut> mPhotos;
 
     public PhotoListAdapter(@NonNull Context context,
-                            ArrayList<ImageDtoOut> photos,
+                            List<ImageDtoOut> photos,
                             @NonNull Listener listener) {
         mLayoutInflater = LayoutInflater.from(context);
         mListener = listener;
@@ -40,12 +40,12 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoViewHolder> {
         holder.setPhoto(mPhotos.get(position));
     }
 
-    public void appendPhotos(ArrayList<ImageDtoOut> photos) {
+    public void appendPhotos(List<ImageDtoOut> photos) {
         mPhotos.addAll(photos);
         notifyDataSetChanged();
     }
 
-    public void setPhotos(ArrayList<ImageDtoOut> photos) {
+    public void setPhotos(List<ImageDtoOut> photos) {
         mPhotos = photos;
         notifyDataSetChanged();
     }

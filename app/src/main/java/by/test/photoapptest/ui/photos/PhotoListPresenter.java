@@ -3,17 +3,24 @@ package by.test.photoapptest.ui.photos;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.raizlabs.android.dbflow.rx2.language.RXSQLite;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+
+import java.util.List;
+
 import javax.inject.Inject;
 
 import by.test.photoapptest.di.App;
-import by.test.photoapptest.model.photo.ImageGetResponse;
-import by.test.photoapptest.model.photo.ImagePushResponse;
-import by.test.photoapptest.model.user.SignUserOutDto;
+import by.test.photoapptest.ui.model.photo.ImageDtoOut;
+import by.test.photoapptest.ui.model.photo.ImageGetResponse;
+import by.test.photoapptest.ui.model.user.SignUserOutDto;
 import by.test.photoapptest.util.retrofit.PhotoServiceApi;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 /**
  * Created by SlowAR on 11.05.2017.
@@ -88,5 +95,19 @@ public class PhotoListPresenter {
 
                     }
                 });
+    }
+
+    public void putPhotosInDb(List<ImageDtoOut> photoList) {
+        List<ImageDtoOut> list =  SQLite.select().from(ImageDtoOut.class).queryList();
+        if(list.isEmpty()) {
+            for (ImageDtoOut image : photoList) {
+                image.insert();
+            }
+        }
+    }
+
+    public void getPhotosFromDb() {
+        List<ImageDtoOut> list =  SQLite.select().from(ImageDtoOut.class).queryList();
+        mListener.updatePhotoList(list);
     }
 }

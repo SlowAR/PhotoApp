@@ -1,8 +1,8 @@
 package by.test.photoapptest.ui.photos;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import by.test.photoapptest.model.photo.ImageDtoOut;
+import by.test.photoapptest.ui.model.photo.ImageDtoOut;
 
 /**
  * Created by SlowAR on 11.05.2017.
@@ -10,7 +10,7 @@ import by.test.photoapptest.model.photo.ImageDtoOut;
 
 public interface PhotosListener {
 
-    void updatePhotoList(ArrayList<ImageDtoOut> photoList);
+    void updatePhotoList(List<ImageDtoOut> photoList);
 
     void refreshUserPhotos();
 }

@@ -9,8 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import by.test.photoapptest.R;
-import by.test.photoapptest.model.comment.CommentDtoOut;
-import by.test.photoapptest.model.photo.ImageDtoOut;
+import by.test.photoapptest.ui.model.comment.CommentDtoOut;
 
 /**
  * Created by SlowAR on 10.05.2017.

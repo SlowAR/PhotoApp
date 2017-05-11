@@ -12,15 +12,14 @@ import javax.inject.Inject;
 
 import by.test.photoapptest.R;
 import by.test.photoapptest.di.App;
-import by.test.photoapptest.model.user.SignUserDtoIn;
-import by.test.ui.signin.FragmentSigninPageBinding;
+import by.test.photoapptest.ui.model.user.SignUserDtoIn;
 
 public class SignInPageFragment extends Fragment implements View.OnClickListener {
 
     @Inject
     SignInPresenter mPresenter;
 
-    private FragmentSigninPageBinding mBinding;
+    private by.test.photoapptest.ui.signin.FragmentSigninPageBinding mBinding;
     private SignInListener mListener;
 
     public SignInPageFragment() {

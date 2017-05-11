@@ -1,19 +1,30 @@
-package by.test.photoapptest.model.comment;
+package by.test.photoapptest.ui.model.comment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+import by.test.photoapptest.util.dbflow.PhotoDatabase;
 
 /**
  * Created by SlowAR on 11.05.2017.
  */
 
-public class CommentDtoOut {
+@Table(database = PhotoDatabase.class)
+public class CommentDtoOut extends BaseModel {
 
+    @Column
     @JsonProperty("date")
     private int date;
 
+    @Column
+    @PrimaryKey
     @JsonProperty("id")
     private int id;
 
+    @Column
     @JsonProperty("text")
     private String text;
 

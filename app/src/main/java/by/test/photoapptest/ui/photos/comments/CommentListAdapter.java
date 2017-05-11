@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import by.test.photoapptest.model.comment.CommentDtoOut;
-import by.test.photoapptest.model.photo.ImageDtoOut;
+import by.test.photoapptest.ui.model.comment.CommentDtoOut;
 
 /**
  * Created by SlowAR on 10.05.2017.
@@ -19,10 +19,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentViewHolder> 
 
     private final LayoutInflater mLayoutInflater;
     private Listener mListener;
-    private ArrayList<CommentDtoOut> mComments;
+    private List<CommentDtoOut> mComments;
 
     public CommentListAdapter(@NonNull Context context,
-                              ArrayList<CommentDtoOut> comments,
+                              List<CommentDtoOut> comments,
                               @NonNull Listener listener) {
         mLayoutInflater = LayoutInflater.from(context);
         mListener = listener;
@@ -41,12 +41,12 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentViewHolder> 
         holder.setComment(mComments.get(position));
     }
 
-    public void appendComments(ArrayList<CommentDtoOut> comments) {
+    public void appendComments(List<CommentDtoOut> comments) {
         mComments.addAll(comments);
         notifyDataSetChanged();
     }
 
-    public void setComments(ArrayList<CommentDtoOut> comments) {
+    public void setComments(List<CommentDtoOut> comments) {
         mComments = comments;
         notifyDataSetChanged();
     }

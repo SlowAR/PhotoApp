@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,15 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import by.test.photoapptest.R;
 import by.test.photoapptest.di.App;
-import by.test.photoapptest.model.comment.CommentDtoIn;
-import by.test.photoapptest.model.comment.CommentDtoOut;
-import by.test.photoapptest.model.photo.ImageDtoOut;
-import by.test.photoapptest.model.user.SignUserOutDto;
+import by.test.photoapptest.ui.model.comment.CommentDtoIn;
+import by.test.photoapptest.ui.model.comment.CommentDtoOut;
+import by.test.photoapptest.ui.model.photo.ImageDtoOut;
+import by.test.photoapptest.ui.model.user.SignUserOutDto;
 import by.test.photoapptest.ui.photos.comments.CommentListAdapter;
 import by.test.photoapptest.util.EndlessRecyclerViewScrollListener;
 
@@ -77,11 +76,6 @@ public class DetailPhotoFragment extends Fragment implements CommentListAdapter.
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail_photo, null, false);
         mBinding.setPhoto(mPhoto);
 
-//        ArrayList<CommentDtoOut> commentList = new ArrayList<>();
-//        for(int i = 0; i < 7; i++) {
-//            commentList.add(new CommentDtoOut(123123123, i, "text" + (i+1)));
-//        }
-
         mAdapter = new CommentListAdapter(getContext(), new ArrayList<CommentDtoOut>(), this);
         mBinding.commentsRecyclerView.setAdapter(mAdapter);
 
@@ -105,8 +99,10 @@ public class DetailPhotoFragment extends Fragment implements CommentListAdapter.
     }
 
     @Override
-    public void updateCommentsList(ArrayList<CommentDtoOut> commentList) {
+    public void updateCommentsList(List<CommentDtoOut> commentList) {
         mAdapter.appendComments(commentList);
+        mPresenter.putCommentsInDb(commentList);
+        //mPresenter.getCommentsFromDb();
     }
 
     @Override

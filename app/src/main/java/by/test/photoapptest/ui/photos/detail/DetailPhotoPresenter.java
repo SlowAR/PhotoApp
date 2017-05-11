@@ -3,13 +3,19 @@ package by.test.photoapptest.ui.photos.detail;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+
+import java.util.List;
+
 import javax.inject.Inject;
 
 import by.test.photoapptest.di.App;
-import by.test.photoapptest.model.comment.CommentDtoIn;
-import by.test.photoapptest.model.comment.CommentsGetDtoResponse;
-import by.test.photoapptest.model.comment.CommentsPostDtoResponse;
-import by.test.photoapptest.model.user.SignUserOutDto;
+import by.test.photoapptest.ui.model.comment.CommentDtoIn;
+import by.test.photoapptest.ui.model.comment.CommentDtoOut;
+import by.test.photoapptest.ui.model.comment.CommentsGetDtoResponse;
+import by.test.photoapptest.ui.model.comment.CommentsPostDtoResponse;
+import by.test.photoapptest.ui.model.photo.ImageDtoOut;
+import by.test.photoapptest.ui.model.user.SignUserOutDto;
 import by.test.photoapptest.util.retrofit.PhotoServiceApi;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -111,5 +117,19 @@ public class DetailPhotoPresenter {
                     public void onComplete() {
                     }
                 });
+    }
+
+    public void putCommentsInDb(List<CommentDtoOut> commentList) {
+        List<CommentDtoOut> list =  SQLite.select().from(CommentDtoOut.class).queryList();
+        if(list.isEmpty()) {
+            for (CommentDtoOut comment : commentList) {
+                comment.insert();
+            }
+        }
+    }
+
+    public void getCommentsFromDb() {
+        List<CommentDtoOut> list =  SQLite.select().from(CommentDtoOut.class).queryList();
+        mListener.updateCommentsList(list);
     }
 }
