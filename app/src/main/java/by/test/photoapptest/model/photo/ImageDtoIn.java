@@ -23,6 +23,13 @@ public class ImageDtoIn {
     public ImageDtoIn() {
     }
 
+    public ImageDtoIn(String image, int date, double latitude, double longitude) {
+        this.image = image;
+        this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public String getImage() {
         return image;
     }

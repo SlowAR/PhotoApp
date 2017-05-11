@@ -15,10 +15,10 @@ import com.bumptech.glide.Glide;
 
 public class ImageDataBindingAdapter {
 
-    @BindingAdapter(value = "srcCompat")
-    public static void setIcon(@NonNull Context context, @NonNull ImageView imageView, @Nullable String url) {
-        Glide.with(context)
-                .load(url)
-                .into(imageView);
-    }
+//    @BindingAdapter(value = "srcCompat")
+//    public static void setIcon(@NonNull Context context, @NonNull ImageView imageView, @Nullable String url) {
+//        Glide.with(context)
+//                .load(url)
+//                .into(imageView);
+//    }
 }

@@ -25,14 +25,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:onClick="@{() -> listener.choosePhotoItem(photo)}"
-            app:srcCompat="@{photo.url}" />
+            android:onClick="@{() -> listener.choosePhotoItem(photo)}" />
 
         <TextView
             android:id="@+id/photo_date"
             style="@style/TextAppearance.Title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{photo.date}" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </layout>

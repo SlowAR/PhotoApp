@@ -59,7 +59,9 @@ public class PhotosActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
+        SignUserOutDto user = (SignUserOutDto)getIntent().getSerializableExtra("user");
         Intent intent = new Intent(this, CameraActivity.class);
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 

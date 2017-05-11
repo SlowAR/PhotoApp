@@ -1,7 +1,8 @@
 package by.test.photoapptest.util.retrofit;
 
 import by.test.photoapptest.model.photo.ImageDtoIn;
-import by.test.photoapptest.model.photo.ImageResponse;
+import by.test.photoapptest.model.photo.ImageGetResponse;
+import by.test.photoapptest.model.photo.ImagePushResponse;
 import by.test.photoapptest.model.user.SignUserDtoIn;
 import by.test.photoapptest.model.user.SignUserResponse;
 import io.reactivex.Observable;
@@ -24,8 +25,8 @@ public interface PhotoServiceApi {
     Observable<SignUserResponse> signInUser(@Body SignUserDtoIn user);
 
     @GET("image")
-    Observable<ImageResponse> getUserPhotos(@Query("page") int page, @Header("Access-Token") String token);
+    Observable<ImageGetResponse> getUserPhotos(@Query("page") int page, @Header("Access-Token") String token);
 
     @POST("image")
-    Observable<ImageResponse> loadUserPhoto(@Body ImageDtoIn photo, @Header("Access-Token") String token);
+    Observable<ImagePushResponse> pushUserPhoto(@Body ImageDtoIn photo, @Header("Access-Token") String token);
 }

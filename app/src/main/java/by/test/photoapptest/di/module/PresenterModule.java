@@ -26,7 +26,7 @@ public class PresenterModule {
 
     @Provides
     CameraPresenter provideCameraPresenter() {
-        return new CameraPresenter();
+        return new CameraPresenter(mContext);
     }
 
     @Provides

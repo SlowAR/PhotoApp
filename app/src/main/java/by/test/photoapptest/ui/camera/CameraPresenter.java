@@ -23,7 +23,19 @@ import com.google.android.gms.location.LocationServices;
 
 import java.io.ByteArrayOutputStream;
 
+import javax.inject.Inject;
+
+import by.test.photoapptest.di.App;
+import by.test.photoapptest.model.photo.ImageDtoIn;
+import by.test.photoapptest.model.photo.ImageGetResponse;
+import by.test.photoapptest.model.photo.ImagePushResponse;
+import by.test.photoapptest.model.user.SignUserOutDto;
 import by.test.photoapptest.util.Constants;
+import by.test.photoapptest.util.retrofit.PhotoServiceApi;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -34,10 +46,22 @@ import static android.content.Context.LOCATION_SERVICE;
 public class CameraPresenter implements LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
+    @Inject
+    PhotoServiceApi mPhotoServiceApi;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     private Context mContext;
     private LocationRequest mLocationRequest;
+    private SignUserOutDto mUser;
+
+    public CameraPresenter(@NonNull Context context) {
+        App.getAppComponent().inject(this);
+        mContext = context;
+    }
+
+    public void setUser(@NonNull SignUserOutDto user) {
+        mUser = user;
+    }
 
     public void onStart() {
         if (mGoogleApiClient != null) {
@@ -51,11 +75,35 @@ public class CameraPresenter implements LocationListener, GoogleApiClient.Connec
         }
     }
 
-    public void pushImageToCloud(@NonNull Context context, byte[] photo) {
-        String base64Image = resizeBitmap(photo);
+    public void pushImageToCloud(byte[] picture) {
+        String base64Image = resizeBitmap(picture);
         double latitude = mLastLocation.getLatitude();
         double longitude = mLastLocation.getLongitude();
         int currentDate = (int)(System.currentTimeMillis() / 1000L);
+
+        ImageDtoIn photo = new ImageDtoIn(base64Image, currentDate, latitude, longitude);
+
+        mPhotoServiceApi.pushUserPhoto(photo, mUser.getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ImagePushResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(ImagePushResponse value) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
     }
 
     private String resizeBitmap(byte[] photo) {

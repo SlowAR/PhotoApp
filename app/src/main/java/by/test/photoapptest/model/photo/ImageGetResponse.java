@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by SlowAR on 11.05.2017.
  */
 
-public class ImageResponse {
+public class ImageGetResponse {
 
     @JsonProperty("status")
     private int status;
@@ -16,7 +16,7 @@ public class ImageResponse {
     @JsonProperty("data")
     private ArrayList<ImageDtoOut> photos;
 
-    public ImageResponse() {
+    public ImageGetResponse() {
     }
 
     public int getStatus() {

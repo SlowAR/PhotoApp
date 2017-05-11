@@ -15,6 +15,7 @@ import javax.inject.Inject;
 
 import by.test.photoapptest.R;
 import by.test.photoapptest.di.App;
+import by.test.photoapptest.model.user.SignUserOutDto;
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -28,6 +29,8 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         App.getAppComponent().inject(this);
 
+        SignUserOutDto user = (SignUserOutDto)getIntent().getSerializableExtra("user");
+        mPresenter.setUser(user);
         mPresenter.connectGoogleApi(this);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_camera);
 
@@ -35,7 +38,7 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onPictureTaken(byte[] picture) {
                 super.onPictureTaken(picture);
-                mPresenter.pushImageToCloud(CameraActivity.this, picture);
+                mPresenter.pushImageToCloud(picture);
             }
         });
     }
