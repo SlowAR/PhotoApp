@@ -1,5 +1,8 @@
 package by.test.photoapptest.util.retrofit;
 
+import by.test.photoapptest.model.comment.CommentDtoIn;
+import by.test.photoapptest.model.comment.CommentsGetDtoResponse;
+import by.test.photoapptest.model.comment.CommentsPostDtoResponse;
 import by.test.photoapptest.model.photo.ImageDtoIn;
 import by.test.photoapptest.model.photo.ImageGetResponse;
 import by.test.photoapptest.model.photo.ImagePushResponse;
@@ -27,11 +30,29 @@ public interface PhotoServiceApi {
     Observable<SignUserResponse> signInUser(@Body SignUserDtoIn user);
 
     @GET("image")
-    Observable<ImageGetResponse> getUserPhotos(@Query("page") int page, @Header("Access-Token") String token);
+    Observable<ImageGetResponse> getUserPhotos(@Query("page") int page,
+                                               @Header("Access-Token") String token);
 
     @POST("image")
-    Observable<ImagePushResponse> pushUserPhoto(@Body ImageDtoIn photo, @Header("Access-Token") String token);
+    Observable<ImagePushResponse> pushUserPhoto(@Body ImageDtoIn photo,
+                                                @Header("Access-Token") String token);
 
     @DELETE("image/{id}")
-    Observable<ImageGetResponse> deleteUserPhoto(@Path("id") int id, @Header("Access-Token") String token);
+    Observable<ImageGetResponse> deleteUserPhoto(@Path("id") int id,
+                                                 @Header("Access-Token") String token);
+
+    @GET("image/{imageId}/comment")
+    Observable<CommentsGetDtoResponse> getPhotoComments(@Path("imageId") int imageId,
+                                                        @Query("page") int page,
+                                                        @Header("Access-Token") String token);
+
+    @POST("image/{imageId}/comment")
+    Observable<CommentsPostDtoResponse> postPhotoComments(@Path("imageId") int imageId,
+                                                          @Body CommentDtoIn page,
+                                                          @Header("Access-Token") String token);
+
+    @DELETE("image/{imageId}/comment/{commentId}")
+    Observable<CommentsGetDtoResponse> deletePhotoComments(@Path("imageId") int imageId,
+                                                           @Path("commentId") int commentId,
+                                                           @Header("Access-Token") String token);
 }

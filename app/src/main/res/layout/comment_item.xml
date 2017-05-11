@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--suppress AndroidUnknownAttribute -->
+    <data class="by.test.photoapptest.ui.photos.comments.CommentItemBinding">
+
+        <variable
+            name="comment"
+            type="by.test.photoapptest.model.comment.CommentDtoOut" />
+
+        <variable
+            name="listener"
+            type="by.test.photoapptest.ui.photos.comments.CommentListAdapter.Listener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/std_margin">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/comment_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/comment_back">
+
+            <TextView
+                android:id="@+id/comment_text"
+                style="@style/TextAppearance.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{comment.text}"
+                app:layout_constraintBottom_toTopOf="@+id/comment_date"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="TextView" />
+
+            <TextView
+                android:id="@+id/comment_date"
+                style="@style/TextAppearance.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{String.valueOf(comment.date)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:text="TextView" />
+        </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</layout>

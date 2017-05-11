@@ -8,4 +8,5 @@
     <color name="gray">#aaaaaa</color>
     <color name="white">#ffffff</color>
     <color name="app_color">#99cc00</color>
+    <color name="comment_back">#99e1e2</color>
 </resources>

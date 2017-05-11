@@ -66,9 +66,9 @@ public class PhotosActivity extends AppCompatActivity
     }
 
     @Override
-    public void onPhotoItemClicked(@NonNull ImageDtoOut photo) {
+    public void onPhotoItemClicked(@NonNull ImageDtoOut photo, @NonNull SignUserOutDto user) {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, DetailPhotoFragment.newInstance(photo))
+                .replace(R.id.container, DetailPhotoFragment.newInstance(photo, user))
                 .commit();
     }
 }

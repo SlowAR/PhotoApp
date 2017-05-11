@@ -104,7 +104,7 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     @Override
     public void choosePhotoItem(@NonNull ImageDtoOut photo) {
         if (mListener != null) {
-            mListener.onPhotoItemClicked(photo);
+            mListener.onPhotoItemClicked(photo, mUser);
         }
     }
 
@@ -114,6 +114,6 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     }
 
     public interface OnFragmentInteractionListener {
-        void onPhotoItemClicked(@NonNull ImageDtoOut photo);
+        void onPhotoItemClicked(@NonNull ImageDtoOut photo, @NonNull SignUserOutDto user);
     }
 }

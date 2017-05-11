@@ -14,7 +14,7 @@ import by.test.photoapptest.model.photo.ImageDtoOut;
  * Created by SlowAR on 10.05.2017.
  */
 
-public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListViewHolder> {
+public class PhotoListAdapter extends RecyclerView.Adapter<PhotoViewHolder> {
 
     private final LayoutInflater mLayoutInflater;
     private Listener mListener;
@@ -29,14 +29,14 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListViewHolder> 
     }
 
     @Override
-    public PhotoListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        PhotoListViewHolder photoListViewHolder = PhotoListViewHolder.inflate(mLayoutInflater, parent);
+    public PhotoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        PhotoViewHolder photoListViewHolder = PhotoViewHolder.inflate(mLayoutInflater, parent);
         photoListViewHolder.setListener(mListener);
         return photoListViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(PhotoListViewHolder holder, int position) {
+    public void onBindViewHolder(PhotoViewHolder holder, int position) {
         holder.setPhoto(mPhotos.get(position));
     }
 

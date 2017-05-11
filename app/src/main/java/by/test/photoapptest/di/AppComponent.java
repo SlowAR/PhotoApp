@@ -8,6 +8,8 @@ import by.test.photoapptest.ui.camera.CameraPresenter;
 import by.test.photoapptest.ui.photos.PhotoListFragment;
 import by.test.photoapptest.ui.photos.PhotoListPresenter;
 import by.test.photoapptest.ui.photos.PhotosActivity;
+import by.test.photoapptest.ui.photos.detail.DetailPhotoFragment;
+import by.test.photoapptest.ui.photos.detail.DetailPhotoPresenter;
 import by.test.photoapptest.ui.signin.SignInPageFragment;
 import by.test.photoapptest.ui.signin.SignInPresenter;
 import by.test.photoapptest.ui.signin.SignUpPageFragment;
@@ -27,6 +29,8 @@ public interface AppComponent {
 
     void inject(PhotoListFragment fragment);
 
+    void inject(DetailPhotoFragment fragment);
+
     void inject(SignInPresenter presenter);
 
     void inject(SignUpPresenter presenter);
@@ -34,4 +38,6 @@ public interface AppComponent {
     void inject(PhotoListPresenter presenter);
 
     void inject(CameraPresenter presenter);
+
+    void inject(DetailPhotoPresenter presenter);
 }

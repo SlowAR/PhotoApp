@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import by.test.photoapptest.ui.camera.CameraActivity;
 import by.test.photoapptest.ui.camera.CameraPresenter;
 import by.test.photoapptest.ui.photos.PhotoListPresenter;
+import by.test.photoapptest.ui.photos.detail.DetailPhotoPresenter;
 import by.test.photoapptest.ui.signin.SignInPresenter;
 import by.test.photoapptest.ui.signin.SignUpPresenter;
 import dagger.Module;
@@ -42,5 +43,10 @@ public class PresenterModule {
     @Provides
     PhotoListPresenter providePhotoListPresenter() {
         return new PhotoListPresenter(mContext);
+    }
+
+    @Provides
+    DetailPhotoPresenter provideDetailPhotoPresenter() {
+        return new DetailPhotoPresenter(mContext);
     }
 }
