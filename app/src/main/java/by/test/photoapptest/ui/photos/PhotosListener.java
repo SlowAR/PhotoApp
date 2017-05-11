@@ -11,4 +11,6 @@ import by.test.photoapptest.model.photo.ImageDtoOut;
 public interface PhotosListener {
 
     void updatePhotoList(ArrayList<ImageDtoOut> photoList);
+
+    void refreshUserPhotos();
 }

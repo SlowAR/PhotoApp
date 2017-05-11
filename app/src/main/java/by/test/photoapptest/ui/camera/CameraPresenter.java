@@ -27,7 +27,6 @@ import javax.inject.Inject;
 
 import by.test.photoapptest.di.App;
 import by.test.photoapptest.model.photo.ImageDtoIn;
-import by.test.photoapptest.model.photo.ImageGetResponse;
 import by.test.photoapptest.model.photo.ImagePushResponse;
 import by.test.photoapptest.model.user.SignUserOutDto;
 import by.test.photoapptest.util.Constants;
@@ -79,7 +78,7 @@ public class CameraPresenter implements LocationListener, GoogleApiClient.Connec
         String base64Image = resizeBitmap(picture);
         double latitude = mLastLocation.getLatitude();
         double longitude = mLastLocation.getLongitude();
-        int currentDate = (int)(System.currentTimeMillis() / 1000L);
+        int currentDate = (int) (System.currentTimeMillis() / 1000L);
 
         ImageDtoIn photo = new ImageDtoIn(base64Image, currentDate, latitude, longitude);
 

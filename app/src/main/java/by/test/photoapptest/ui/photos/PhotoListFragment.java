@@ -47,6 +47,14 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
         mPresenter.getUserPhotos(0);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(mPresenter != null) {
+            mPresenter.getUserPhotos(0);
+        }
+    }
+
     public void setUser(@NonNull SignUserOutDto user) {
         mUser = user;
     }
@@ -54,6 +62,11 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     @Override
     public void updatePhotoList(ArrayList<ImageDtoOut> photoList) {
         mAdapter.setPhotos(photoList);
+    }
+
+    @Override
+    public void refreshUserPhotos() {
+        mPresenter.getUserPhotos(0);
     }
 
     @Override
@@ -93,6 +106,11 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
         if (mListener != null) {
             mListener.onPhotoItemClicked(photo);
         }
+    }
+
+    @Override
+    public void deletePhotoItem(@NonNull ImageDtoOut photo) {
+        mPresenter.deleteUserPhoto(photo.getId());
     }
 
     public interface OnFragmentInteractionListener {

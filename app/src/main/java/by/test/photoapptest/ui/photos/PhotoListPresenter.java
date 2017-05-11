@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import by.test.photoapptest.di.App;
 import by.test.photoapptest.model.photo.ImageGetResponse;
+import by.test.photoapptest.model.photo.ImagePushResponse;
 import by.test.photoapptest.model.user.SignUserOutDto;
 import by.test.photoapptest.util.retrofit.PhotoServiceApi;
 import io.reactivex.Observer;
@@ -59,6 +60,32 @@ public class PhotoListPresenter {
 
                     @Override
                     public void onComplete() {
+                    }
+                });
+    }
+
+    public void deleteUserPhoto(int id) {
+        mPhotoServiceApi.deleteUserPhoto(id, mUser.getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ImageGetResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(ImageGetResponse value) {
+                        mListener.refreshUserPhotos();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

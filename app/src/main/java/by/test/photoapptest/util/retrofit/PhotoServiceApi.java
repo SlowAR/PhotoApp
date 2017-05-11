@@ -7,9 +7,11 @@ import by.test.photoapptest.model.user.SignUserDtoIn;
 import by.test.photoapptest.model.user.SignUserResponse;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -29,4 +31,7 @@ public interface PhotoServiceApi {
 
     @POST("image")
     Observable<ImagePushResponse> pushUserPhoto(@Body ImageDtoIn photo, @Header("Access-Token") String token);
+
+    @DELETE("image/{id}")
+    Observable<ImageGetResponse> deleteUserPhoto(@Path("id") int id, @Header("Access-Token") String token);
 }

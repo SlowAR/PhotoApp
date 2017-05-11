@@ -17,7 +17,6 @@ import by.test.photoapptest.model.photo.ImageDtoOut;
 public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListViewHolder> {
 
     private final LayoutInflater mLayoutInflater;
-    private Context mContext;
     private Listener mListener;
     private ArrayList<ImageDtoOut> mPhotos;
 
@@ -25,7 +24,6 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListViewHolder> 
                             ArrayList<ImageDtoOut> photos,
                             @NonNull Listener listener) {
         mLayoutInflater = LayoutInflater.from(context);
-        mContext = context;
         mListener = listener;
         mPhotos = photos;
     }
@@ -39,7 +37,7 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListViewHolder> 
 
     @Override
     public void onBindViewHolder(PhotoListViewHolder holder, int position) {
-        holder.setPhoto(mPhotos.get(position), mContext);
+        holder.setPhoto(mPhotos.get(position));
     }
 
     public void setPhotos(ArrayList<ImageDtoOut> photos) {
@@ -55,5 +53,7 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListViewHolder> 
     public interface Listener {
 
         void choosePhotoItem(@NonNull ImageDtoOut photo);
+
+        void deletePhotoItem(@NonNull ImageDtoOut photo);
     }
 }
