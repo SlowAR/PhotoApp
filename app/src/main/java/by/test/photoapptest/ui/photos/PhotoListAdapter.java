@@ -68,6 +68,8 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoViewHolder> {
 
     public interface Listener {
 
+        String convertDate(@NonNull ImageDtoOut photo);
+
         void choosePhotoItem(@NonNull ImageDtoOut photo);
 
         void deletePhotoItem(@NonNull ImageDtoOut photo);

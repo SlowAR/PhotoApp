@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Camera;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -80,7 +79,7 @@ public class CameraPresenter implements LocationListener, GoogleApiClient.Connec
     }
 
     public void pushImageToCloud(byte[] picture) {
-        if(mGoogleApiClient.isConnected()) {
+        if (mGoogleApiClient.isConnected()) {
             getLastLocation();
         }
         if (mLastLocation == null) {
@@ -121,7 +120,7 @@ public class CameraPresenter implements LocationListener, GoogleApiClient.Connec
         Bitmap bitmapPhoto = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         int width = bitmapPhoto.getWidth();
         int height = bitmapPhoto.getHeight();
-        float ratio = width / height;
+        float ratio = (float) width / height;
         if (ratio > 1) {
             if (width >= Constants.MAX_PHOTO_SIZE) {
                 width = Constants.MAX_PHOTO_SIZE;
@@ -159,7 +158,7 @@ public class CameraPresenter implements LocationListener, GoogleApiClient.Connec
     private void enableGps(@NonNull Context context) {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((CameraActivity)context,
+            ActivityCompat.requestPermissions((CameraActivity) context,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
 

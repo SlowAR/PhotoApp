@@ -15,8 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.util.Util;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.inject.Inject;
 
@@ -26,6 +31,9 @@ import by.test.photoapptest.ui.camera.CameraActivity;
 import by.test.photoapptest.ui.model.photo.ImageDtoOut;
 import by.test.photoapptest.ui.model.user.SignUserOutDto;
 import by.test.photoapptest.util.EndlessRecyclerViewScrollListener;
+import by.test.photoapptest.util.Utils;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 public class PhotoListFragment extends Fragment implements PhotoListAdapter.Listener, PhotosListener {
 
@@ -57,11 +65,15 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     @Override
     public void onStart() {
         super.onStart();
-        if(mAdapter != null) {
+        if (mAdapter != null) {
             mAdapter.clearPhotos();
         }
-        if(mPresenter != null) {
-            mPresenter.getUserPhotos(0);
+        if (mPresenter != null) {
+            if (Utils.checkInternetConnection(getContext())) {
+                mPresenter.getUserPhotos(0);
+            } else {
+                mPresenter.getPhotosFromDb();
+            }
         }
     }
 
@@ -83,12 +95,12 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
         mBinding.photosRecyclerView.setAdapter(mAdapter);
         EndlessRecyclerViewScrollListener mScrollListener =
                 new EndlessRecyclerViewScrollListener((GridLayoutManager) (mBinding
-                .photosRecyclerView.getLayoutManager())) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                mPresenter.getUserPhotos(page);
-            }
-        };
+                        .photosRecyclerView.getLayoutManager())) {
+                    @Override
+                    public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                        mPresenter.getUserPhotos(page);
+                    }
+                };
         mBinding.photosRecyclerView.addOnScrollListener(mScrollListener);
 
         return mBinding.getRoot();
@@ -109,6 +121,15 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public String convertDate(@NonNull ImageDtoOut photo) {
+        Date convertedDate = new Date(photo.getDate() * 1000L);
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
+        format.setTimeZone(TimeZone.getTimeZone("GMT"));
+        photo.setConvertedDate(format.format(convertedDate));
+        return photo.getConvertedDate();
     }
 
     @Override

@@ -50,7 +50,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:gravity="center"
-                android:text="@{String.valueOf(photo.date)}"
+                android:text="@{photo.convertedDate}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

@@ -40,6 +40,8 @@ public class ImageDtoOut extends BaseModel {
     @JsonProperty("url")
     private String url;
 
+    private String convertedDate;
+
     public ImageDtoOut() {
     }
 
@@ -81,5 +83,13 @@ public class ImageDtoOut extends BaseModel {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getConvertedDate() {
+        return convertedDate;
+    }
+
+    public void setConvertedDate(String convertedDate) {
+        this.convertedDate = convertedDate;
     }
 }

@@ -116,7 +116,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private void setMapCamera(GoogleMap googleMap) {
         double averageLatitude = (minLatitude + maxLatitude) / 2;
         double averageLongitude = (minLongitude + maxLongitude) / 2;
-        double zoom = MAX_ZOOM - (maxLatitude / minLatitude + maxLongitude / minLongitude);
+        double zoom = MAX_ZOOM - ((maxLatitude / minLatitude)+1 + (maxLongitude / minLongitude)+1);
+        if(zoom < 1) {
+            zoom = 1;
+        }
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(averageLatitude, averageLongitude))
