@@ -127,7 +127,6 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     public String convertDate(@NonNull ImageDtoOut photo) {
         Date convertedDate = new Date(photo.getDate() * 1000L);
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy, HH:mm:ss");
-        format.setTimeZone(TimeZone.getTimeZone("GMT"));
         photo.setConvertedDate(format.format(convertedDate));
         return photo.getConvertedDate();
     }
