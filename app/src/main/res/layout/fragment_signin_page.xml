@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/std_margin"
             android:hint="@string/login_text"
-            android:inputType="text" />
+            android:inputType="text"
+            android:text="anton123" />
 
         <EditText
             android:id="@+id/password_signin"
@@ -28,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/std_margin"
             android:hint="@string/password_text"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="1q2w3e4r" />
 
         <Button
             android:id="@+id/signin"

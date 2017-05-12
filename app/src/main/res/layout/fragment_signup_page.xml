@@ -37,8 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/std_margin"
             android:hint="@string/password_confirm_text"
-            android:inputType="textPassword"
-            android:text="1q2w3e4r" />
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/signup"
