@@ -22,6 +22,7 @@ public class PhotosActivity extends AppCompatActivity
 
     private final int PHOTO_FRAGMENT_TYPE = 0;
     private final int MAP_FRAGMENT_TYPE = 1;
+    private final String EXTRA_USER = "user";
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private by.test.photoapptest.ui.photos.ActivityPhotosBinding mBinding;
@@ -59,9 +60,9 @@ public class PhotosActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        SignUserOutDto user = (SignUserOutDto)getIntent().getSerializableExtra("user");
+        SignUserOutDto user = (SignUserOutDto)getIntent().getSerializableExtra(EXTRA_USER);
         Intent intent = new Intent(this, CameraActivity.class);
-        intent.putExtra("user", user);
+        intent.putExtra(EXTRA_USER, user);
         startActivity(intent);
     }
 
@@ -69,6 +70,7 @@ public class PhotosActivity extends AppCompatActivity
     public void onPhotoItemClicked(@NonNull ImageDtoOut photo, @NonNull SignUserOutDto user) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, DetailPhotoFragment.newInstance(photo, user))
+                .addToBackStack(null)
                 .commit();
     }
 }

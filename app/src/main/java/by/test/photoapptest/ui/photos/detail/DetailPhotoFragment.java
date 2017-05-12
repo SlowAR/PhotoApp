@@ -58,8 +58,8 @@ public class DetailPhotoFragment extends Fragment implements CommentListAdapter.
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.getAppComponent().inject(this);
-        mPresenter.setUser(mUser);
         mPresenter.setListener(this);
+        mPresenter.setUser(mUser);
     }
 
     @Override
@@ -75,10 +75,8 @@ public class DetailPhotoFragment extends Fragment implements CommentListAdapter.
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail_photo, null, false);
         mBinding.setPhoto(mPhoto);
-
         mAdapter = new CommentListAdapter(getContext(), new ArrayList<CommentDtoOut>(), this);
         mBinding.commentsRecyclerView.setAdapter(mAdapter);
-
         EndlessRecyclerViewScrollListener mScrollListener =
                 new EndlessRecyclerViewScrollListener((LinearLayoutManager) (mBinding
                 .commentsRecyclerView.getLayoutManager())) {
@@ -88,7 +86,6 @@ public class DetailPhotoFragment extends Fragment implements CommentListAdapter.
             }
         };
         mBinding.commentsRecyclerView.addOnScrollListener(mScrollListener);
-
         mBinding.sendComment.setOnClickListener(this);
         return mBinding.getRoot();
     }
@@ -96,18 +93,24 @@ public class DetailPhotoFragment extends Fragment implements CommentListAdapter.
     @Override
     public void deleteCommentItem(@NonNull CommentDtoOut comment) {
         mPresenter.deletePhotoComment(mPhoto.getId(), comment.getId());
+        mPresenter.deleteCommentFromDb(comment);
+        mAdapter.removeComment(comment);
     }
 
     @Override
     public void updateCommentsList(List<CommentDtoOut> commentList) {
         mAdapter.appendComments(commentList);
         mPresenter.putCommentsInDb(commentList);
-        //mPresenter.getCommentsFromDb();
     }
 
     @Override
     public void refreshPhotoComments() {
-        mPresenter.getPhotoComments(mPhoto.getId(), 0);
+        if(mAdapter != null) {
+            mAdapter.clearComments();
+        }
+        if(mPresenter != null) {
+            mPresenter.getPhotoComments(mPhoto.getId(), 0);
+        }
     }
 
     @Override

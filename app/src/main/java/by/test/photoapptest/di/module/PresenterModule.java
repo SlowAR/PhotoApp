@@ -3,8 +3,8 @@ package by.test.photoapptest.di.module;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import by.test.photoapptest.ui.camera.CameraActivity;
 import by.test.photoapptest.ui.camera.CameraPresenter;
+import by.test.photoapptest.ui.map.MapPresenter;
 import by.test.photoapptest.ui.photos.PhotoListPresenter;
 import by.test.photoapptest.ui.photos.detail.DetailPhotoPresenter;
 import by.test.photoapptest.ui.signin.SignInPresenter;
@@ -48,5 +48,10 @@ public class PresenterModule {
     @Provides
     DetailPhotoPresenter provideDetailPhotoPresenter() {
         return new DetailPhotoPresenter(mContext);
+    }
+
+    @Provides
+    MapPresenter provideMapPresenter() {
+        return new MapPresenter(mContext);
     }
 }

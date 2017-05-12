@@ -10,6 +10,8 @@ import java.util.List;
 
 import by.test.photoapptest.ui.model.photo.ImageDtoOut;
 
+import static by.test.photoapptest.R.menu.photos;
+
 /**
  * Created by SlowAR on 10.05.2017.
  */
@@ -45,9 +47,18 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void removePhoto(ImageDtoOut photo) {
+        mPhotos.remove(photo);
+        notifyDataSetChanged();
+    }
+
     public void setPhotos(List<ImageDtoOut> photos) {
         mPhotos = photos;
         notifyDataSetChanged();
+    }
+
+    public void clearPhotos(){
+        mPhotos.clear();
     }
 
     @Override

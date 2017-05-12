@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import by.test.photoapptest.di.module.PresenterModule;
 import by.test.photoapptest.ui.camera.CameraActivity;
 import by.test.photoapptest.ui.camera.CameraPresenter;
+import by.test.photoapptest.ui.map.MapFragment;
 import by.test.photoapptest.ui.photos.PhotoListFragment;
 import by.test.photoapptest.ui.photos.PhotoListPresenter;
 import by.test.photoapptest.ui.photos.PhotosActivity;
@@ -30,6 +31,8 @@ public interface AppComponent {
     void inject(PhotoListFragment fragment);
 
     void inject(DetailPhotoFragment fragment);
+
+    void inject(MapFragment fragment);
 
     void inject(SignInPresenter presenter);
 

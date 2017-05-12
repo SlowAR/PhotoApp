@@ -1,10 +1,13 @@
 package by.test.photoapptest.ui.photos;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +22,7 @@ import javax.inject.Inject;
 
 import by.test.photoapptest.R;
 import by.test.photoapptest.di.App;
+import by.test.photoapptest.ui.camera.CameraActivity;
 import by.test.photoapptest.ui.model.photo.ImageDtoOut;
 import by.test.photoapptest.ui.model.user.SignUserOutDto;
 import by.test.photoapptest.util.EndlessRecyclerViewScrollListener;
@@ -53,6 +57,9 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     @Override
     public void onStart() {
         super.onStart();
+        if(mAdapter != null) {
+            mAdapter.clearPhotos();
+        }
         if(mPresenter != null) {
             mPresenter.getUserPhotos(0);
         }
@@ -66,12 +73,6 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     public void updatePhotoList(List<ImageDtoOut> photoList) {
         mAdapter.appendPhotos(photoList);
         mPresenter.putPhotosInDb(photoList);
-        //mPresenter.getPhotosFromDb();
-    }
-
-    @Override
-    public void refreshUserPhotos() {
-        mPresenter.getUserPhotos(0);
     }
 
     @Override
@@ -120,6 +121,8 @@ public class PhotoListFragment extends Fragment implements PhotoListAdapter.List
     @Override
     public void deletePhotoItem(@NonNull ImageDtoOut photo) {
         mPresenter.deleteUserPhoto(photo.getId());
+        mPresenter.deletePhotoFromDb(photo);
+        mAdapter.removePhoto(photo);
     }
 
     public interface OnFragmentInteractionListener {

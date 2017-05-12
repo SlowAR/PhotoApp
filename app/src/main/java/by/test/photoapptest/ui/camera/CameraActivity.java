@@ -1,7 +1,10 @@
 package by.test.photoapptest.ui.camera;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -13,7 +16,11 @@ import by.test.photoapptest.R;
 import by.test.photoapptest.di.App;
 import by.test.photoapptest.ui.model.user.SignUserOutDto;
 
+import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
+
 public class CameraActivity extends AppCompatActivity {
+
+    private final String EXTRA_USER = "user";
 
     private by.test.photoapptest.ui.camera.ActivityCameraBinding mBinding;
 
@@ -25,7 +32,7 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         App.getAppComponent().inject(this);
 
-        SignUserOutDto user = (SignUserOutDto)getIntent().getSerializableExtra("user");
+        SignUserOutDto user = (SignUserOutDto)getIntent().getSerializableExtra(EXTRA_USER);
         mPresenter.setUser(user);
         mPresenter.connectGoogleApi(this);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_camera);

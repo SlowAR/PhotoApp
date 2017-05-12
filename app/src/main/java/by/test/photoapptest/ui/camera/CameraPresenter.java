@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Camera;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Base64;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -45,6 +47,9 @@ import static android.content.Context.LOCATION_SERVICE;
 public class CameraPresenter implements LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
+    private final int LOCATION_REQUEST_INTERVAL = 1000;
+    private final int LOCATION_FASTEST_INTERVAL = 1000;
+
     @Inject
     PhotoServiceApi mPhotoServiceApi;
     private GoogleApiClient mGoogleApiClient;
@@ -75,6 +80,14 @@ public class CameraPresenter implements LocationListener, GoogleApiClient.Connec
     }
 
     public void pushImageToCloud(byte[] picture) {
+        if(mGoogleApiClient.isConnected()) {
+            getLastLocation();
+        }
+        if (mLastLocation == null) {
+            Toast.makeText(mContext, "Could not get your location", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         String base64Image = resizeBitmap(picture);
         double latitude = mLastLocation.getLatitude();
         double longitude = mLastLocation.getLongitude();
@@ -92,7 +105,6 @@ public class CameraPresenter implements LocationListener, GoogleApiClient.Connec
 
                     @Override
                     public void onNext(ImagePushResponse value) {
-
                     }
 
                     @Override
@@ -145,14 +157,14 @@ public class CameraPresenter implements LocationListener, GoogleApiClient.Connec
     }
 
     private void enableGps(@NonNull Context context) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((CameraActivity)context,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+
         LocationManager locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions((CameraActivity) context,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }
-        } else {
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             context.startActivity(intent);
         }
@@ -161,25 +173,29 @@ public class CameraPresenter implements LocationListener, GoogleApiClient.Connec
     private void initLocationRequest() {
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(1000)
-                .setFastestInterval(1000);
+                .setInterval(LOCATION_REQUEST_INTERVAL)
+                .setFastestInterval(LOCATION_FASTEST_INTERVAL);
     }
 
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
+    private void getLastLocation() {
         LocationManager locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            if (mLastLocation == null) {
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            }
+        } else {
             if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions((CameraActivity) mContext,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-                return;
             }
         }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (mLastLocation == null) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-        }
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
     }
 
     @Override

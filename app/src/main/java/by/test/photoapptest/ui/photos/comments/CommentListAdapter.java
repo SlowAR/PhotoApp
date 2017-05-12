@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.test.photoapptest.ui.model.comment.CommentDtoOut;
+import by.test.photoapptest.ui.model.photo.ImageDtoOut;
 
 /**
  * Created by SlowAR on 10.05.2017.
@@ -46,9 +47,18 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentViewHolder> 
         notifyDataSetChanged();
     }
 
+    public void removeComment(CommentDtoOut comment) {
+        mComments.remove(comment);
+        notifyDataSetChanged();
+    }
+
     public void setComments(List<CommentDtoOut> comments) {
         mComments = comments;
         notifyDataSetChanged();
+    }
+
+    public void clearComments(){
+        mComments.clear();
     }
 
     @Override

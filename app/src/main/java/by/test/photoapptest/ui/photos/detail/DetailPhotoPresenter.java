@@ -12,9 +12,11 @@ import javax.inject.Inject;
 import by.test.photoapptest.di.App;
 import by.test.photoapptest.ui.model.comment.CommentDtoIn;
 import by.test.photoapptest.ui.model.comment.CommentDtoOut;
+import by.test.photoapptest.ui.model.comment.CommentDtoOut_Table;
 import by.test.photoapptest.ui.model.comment.CommentsGetDtoResponse;
 import by.test.photoapptest.ui.model.comment.CommentsPostDtoResponse;
 import by.test.photoapptest.ui.model.photo.ImageDtoOut;
+import by.test.photoapptest.ui.model.photo.ImageDtoOut_Table;
 import by.test.photoapptest.ui.model.user.SignUserOutDto;
 import by.test.photoapptest.util.retrofit.PhotoServiceApi;
 import io.reactivex.Observer;
@@ -106,7 +108,6 @@ public class DetailPhotoPresenter {
 
                     @Override
                     public void onNext(CommentsGetDtoResponse value) {
-                        mListener.refreshPhotoComments();
                     }
 
                     @Override
@@ -120,9 +121,16 @@ public class DetailPhotoPresenter {
     }
 
     public void putCommentsInDb(List<CommentDtoOut> commentList) {
-        List<CommentDtoOut> list =  SQLite.select().from(CommentDtoOut.class).queryList();
-        if(list.isEmpty()) {
-            for (CommentDtoOut comment : commentList) {
+        if(commentList.isEmpty()) {
+            return;
+        }
+
+        for (CommentDtoOut comment : commentList) {
+            CommentDtoOut commentFromDb = SQLite.select()
+                    .from(CommentDtoOut.class)
+                    .where(CommentDtoOut_Table.id.eq(comment.getId()))
+                    .querySingle();
+            if (commentFromDb == null) {
                 comment.insert();
             }
         }
@@ -131,5 +139,9 @@ public class DetailPhotoPresenter {
     public void getCommentsFromDb() {
         List<CommentDtoOut> list =  SQLite.select().from(CommentDtoOut.class).queryList();
         mListener.updateCommentsList(list);
+    }
+
+    public void deleteCommentFromDb(CommentDtoOut comment) {
+        comment.delete();
     }
 }
